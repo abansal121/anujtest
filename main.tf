@@ -88,7 +88,7 @@ resource "aws_instance" "sandbox_web" {
     subnet_id = "${aws_subnet.sandbox-subnet-public-1.id}"
     # Security Group
     vpc_security_group_ids = ["${aws_security_group.ec2-web_sg.id}"]
-    private_ip = "10.3.0.12"
+    private_ip = "10.0.0.15"
 }
 
 resource "aws_volume_attachment" "sandbox_web_1" {
