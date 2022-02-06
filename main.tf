@@ -17,7 +17,7 @@ resource "aws_vpc" "sandbox-vpc" {
 }
 
 resource "aws_subnet" "sandbox-subnet-public-1" {
-    vpc_id = "sandbox-vpc"
+    vpc_name = "sandbox-vpc"
     cidr_block = "10.0.1.0/24"
     map_public_ip_on_launch = "true" //it makes this a public subnet
     availability_zone = "us-east-1"
