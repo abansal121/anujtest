@@ -105,4 +105,20 @@ resource "aws_volume_attachment" "sandbox_web_2" {
 }
 
 
+resource "aws_eip" "lb" {
+  instance = aws_instance.sandbox_web.id
+  vpc      = true
+  private_ip = "10.3.0.12"
+}
+
+
+resource "aws_ebs_volume" "sandbox_web_1" {
+  availability_zone = "us-east-1a"
+  size              = 50
+}
+
+resource "aws_ebs_volume" "sandbox_web_2" {
+  availability_zone = "us-east-1a"
+  size              = 50
+}
 
