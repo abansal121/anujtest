@@ -38,7 +38,7 @@ resource "aws_route_table" "sandbox-public-crt" {
         //associated subnet can reach everywhere
         cidr_block = "0.0.0.0/0" 
         //CRT uses this IGW to reach internet
-        gateway_id = "sandbox-igw" 
+        gateway_id = "${aws_internet_gateway.sandbox-igw.id}" 
     }
     
     tags =  {
