@@ -1,7 +1,7 @@
 provider "aws" {
-  access_key = AKIASDZP5HXHBHG2UOEG
-  secret_key = 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
-  region     = us-east-1
+  access_key = "AKIASDZP5HXHBHG2UOEG"
+  secret_key = "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"
+  region     = "us-east-1"
 }
 
 resource "aws_vpc" "sandbox-vpc" {
