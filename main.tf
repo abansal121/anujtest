@@ -108,8 +108,4 @@ resource "aws_ebs_volume" "sandbox_web_1" {
   size              = 50
 }
 
-resource "aws_ebs_volume" "sandbox_web_2" {
-  availability_zone = "us-east-1a"
-  size              = 50
-}
 
