@@ -105,9 +105,4 @@ resource "aws_volume_attachment" "sandbox_web_2" {
 }
 
 
-resource "aws_eip" "lb" {
-  instance = aws_instance.sandbox_web.id
-  vpc      = true
-  private_ip = "10.3.0.12"
-}
 
