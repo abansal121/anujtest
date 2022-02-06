@@ -11,7 +11,7 @@ resource "aws_vpc" "sandbox-vpc" {
     enable_classiclink = "false"
     instance_tenancy = "default"    
     
-    tags {
+    tags =  {
         Name = "sandbox-vpc"
     }
 }
@@ -21,14 +21,14 @@ resource "aws_subnet" "sandbox-subnet-public-1" {
     cidr_block = "10.0.1.0/24"
     map_public_ip_on_launch = "true" //it makes this a public subnet
     availability_zone = "eu-west-2a"
-    tags {
+    tags =  {
         Name = "sandbox-subnet-public-1"
     }
 }
 
 resource "aws_internet_gateway" "sandbox-igw" {
     vpc_id = "sandbox-vpc"
-    tags {
+    tags =  {
         Name = "sandbox-igw"
     }
 }
@@ -43,7 +43,7 @@ resource "aws_route_table" "sandbox-public-crt" {
         gateway_id = "sandbox-igw" 
     }
     
-    tags {
+    tags =  {
         Name = "sandbox-public-crt"
     }
 }
@@ -78,7 +78,7 @@ egress {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
-    tags {
+    tags =  {
         Name = "ssh-allowed"
     }
 }
