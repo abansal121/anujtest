@@ -98,7 +98,7 @@ resource "aws_volume_attachment" "sandbox_web_1" {
 }
 
 resource "aws_volume_attachment" "sandbox_web_2" {
-  device_name = "xvsd"
+  device_name = "/dev/sbh"
     volume_id   = "${aws_ebs_volume.sandbox_web_2.id}"
   instance_id = "${aws_instance.sandbox_web.id}"
 }
