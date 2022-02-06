@@ -89,3 +89,25 @@ resource "aws_instance" "sandbox_web" {
     # Security Group
     vpc_security_group_ids = ["${aws_security_group.ec2-web_sg.id}"]
 }
+
+resource "aws_volume_attachment" "sandbox_web_1" {
+  device_name = "/dev/sdh"
+  size = 50
+  volume_id   = aws_ebs_volume.sandbox_web_1.id
+  instance_id = "${aws_instance.sandbox_web.id}"
+}
+
+resource "aws_volume_attachment" "sandbox_web_2" {
+  device_name = "xvsd"
+  size = 50
+  volume_id   = aws_ebs_volume.sandbox_web_2.id
+  instance_id = "${aws_instance.sandbox_web.id}"
+}
+
+
+resource "aws_eip" "lb" {
+  instance_id = "${aws_instance.sandbox_web.id}"
+  vpc      = true
+  private_ip = "10.3.0.12"
+}
+
