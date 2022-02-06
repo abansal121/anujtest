@@ -17,24 +17,24 @@ resource "aws_vpc" "sandbox-vpc" {
 }
 
 resource "aws_subnet" "sandbox-subnet-public-1" {
-    vpc_name = "sandbox-vpc"
+    vpc_id = "${aws_vpc.sandbox-vpc.id}"
     cidr_block = "10.0.1.0/24"
     map_public_ip_on_launch = "true" //it makes this a public subnet
-    availability_zone = "us-east-1"
+    availability_zone = "us-east-1a"
     tags =  {
         Name = "sandbox-subnet-public-1"
     }
 }
 
 resource "aws_internet_gateway" "sandbox-igw" {
-    vpc_id = "sandbox-vpc"
+    vpc_id = "${aws_vpc.sandbox-vpc.id}"
     tags =  {
         Name = "sandbox-igw"
     }
 }
 
 resource "aws_route_table" "sandbox-public-crt" {
-    vpc_id = "sandbox-vpc"
+    vpc_id = "${aws_vpc.sandbox-vpc.id}"
     
     route {
         //associated subnet can reach everywhere
@@ -49,13 +49,13 @@ resource "aws_route_table" "sandbox-public-crt" {
 }
 
 resource "aws_route_table_association" "sandbox-crta-public-subnet-1"{
-    subnet_id = "sandbox-subnet-public-1"
-    route_table_id = "sandbox-public-crt"
+    subnet_id = "{aws_subnet.sandbox-subnet-public-1.id}"
+    route_table_id = "{aws_route_table.sandbox-public-crt.id}"
 }
 
 resource "aws_security_group" "ec2-web_sg" {
   name   = "ec2_web_sg"
-  vpc_id = "sandbox-vpc"
+  vpc_id = "${aws_vpc.sandbox-vpc.id}"
 egress {
         from_port = 0
         to_port = 0
@@ -87,7 +87,7 @@ resource "aws_instance" "sandbox_web" {
     ami = "ami-0c2a1acae6667e438"
     instance_type = "t2.micro"
     # VPC
-    subnet_id = "sandbox-subnet-public-1"
+    subnet_id = "${aws_subnet.sandbox-subnet-public-1.id}"
     # Security Group
-    vpc_security_group_ids = ["ec2-web_sg"]
+    vpc_security_group_ids = ["${aws_security_group.ec2-web_sg.id}"]
 }
